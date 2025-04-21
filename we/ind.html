@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>वैलेंटाइन प्रस्ताव</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #ffe6f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+      max-width: 350px;
+      width: 90%;
+      z-index: 2;
+    }
+
+    .card h1 {
+      font-size: 22px;
+      color: #ff3366;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 25px;
+      min-height: 40px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      min-width: 100px;
+    }
+
+    .yes-btn {
+      background-color: #66cc99;
+      color: white;
+    }
+
+    .no-btn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .big-heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #ff3366;
+      color: white;
+      font-size: 26px;
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      opacity: 0;
+      transition: all 0.6s ease;
+      z-index: 5;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    }
+
+    .big-heart.show {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>क्या तुम मेरी वैलेंटाइन बनोगी? 💘</h1>
+    <p id="question">ना नहीं बोल सकती 😜</p>
+    <div class="btn-container">
+      <button class="btn yes-btn" id="yesBtn">हाँ 💚</button>
+      <button class="btn no-btn" id="noBtn">नहीं ❌</button>
+    </div>
+  </div>
+
+  <!-- Big heart with name only -->
+  <div class="big-heart" id="bigHeart"> आपका अनुज ❤️</div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const card = document.getElementById('card');
+    const questionText = document.getElementById('question');
+    const bigHeart = document.getElementById('bigHeart');
+
+    const questions = [
+      "सच में? तुमने हाँ कहा? 😍",
+      "तो क्या तुम मेरे साथ डेट पर चलोगी? 🍕",
+      "क्या मैं तुम्हारा हाथ पकड़ सकता हूँ? 🤝",
+      "क्या मैं तुम्हें हमेशा के लिए अपना कह सकता हूँ? 💍",
+      "क्या तुम एक दिन मुझसे शादी करोगी? 💑",
+      "तो अब ये पक्का हो गया? तुम मेरी हो? 😘",
+      "मैं तुमसे प्यार करता हूँ। अब बच नहीं सकती! 💖"
+    ];
+
+    let qIndex = 0;
+
+    yesBtn.addEventListener('click', () => {
+      if (qIndex < questions.length) {
+        questionText.textContent = questions[qIndex];
+        qIndex++;
+      } else {
+        questionText.textContent = "";
+        yesBtn.style.display = 'none';
+        noBtn.style.display = 'none';
+        bigHeart.classList.add('show');
+      }
+    });
+
+    noBtn.addEventListener('mouseover', () => {
+      const cardRect = card.getBoundingClientRect();
+      const newX = Math.random() * (window.innerWidth - cardRect.width);
+      const newY = Math.random() * (window.innerHeight - cardRect.height);
+      card.style.position = 'absolute';
+      card.style.left = `${newX}px`;
+      card.style.top = `${newY}px`;
+    });
+  </script>
+
+</body>
+</html>
